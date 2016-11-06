@@ -4,3 +4,6 @@
 Homestead.yaml
 Homestead.json
 .env
+*.phpproj
+.vs/FastForwardExpress/v14/.suo
+.vs/config/applicationhost.config
