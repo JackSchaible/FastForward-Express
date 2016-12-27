@@ -20,8 +20,8 @@
 @endsection
 
 @section ('content')  
-<h2>New Customer</h2>
-<form onsubmit="return validate()" method="POST" action="/customers/store">
+<h2>New Account</h2>
+<form onsubmit="return validate()" method="POST" action="/accounts/store">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="well" style="overflow: hidden">
         <!--Basic Information Panel-->
@@ -165,7 +165,7 @@
             <!-- Billing address panel -->
             <div class="col-lg-6 panel panel-default">
                 <div class="col-lg-12 panel-heading">
-                    <h3 class="panel-title"><input type='checkbox' id='billing-address' onclick="enableBody(this.id, 'billing-body')" />Billing Address</h3>
+                    <h3 class="panel-title"><input type='checkbox' id='billing-address' name='billing-address' onclick="enableBody(this.id, 'billing-body')" />Billing Address</h3>
                 </div>
                 <div class="col-lg-12 panel-body">
                     <div class="form-group clearfix">
