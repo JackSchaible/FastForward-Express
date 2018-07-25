@@ -9,29 +9,9 @@
 	class InvoiceModelFactory{
 
 		public function ListAll() {
-			$model = new Invoice\InvoicesModel();
-
 			$invoiceRepo = new Repos\InvoiceRepo();
-			$accountRepo = new Repos\AccountRepo();
-			$billRepo = new Repos\BillRepo();
-			
-			$invoices = $invoiceRepo->ListAll();
 
-			$invoice_view_models = array();
-			foreach ($invoices as $invoice) {
-				$invoice_view_model = new InvoiceViewModel();
-
-				$invoice_view_model->invoice = $invoice;
-				$invoice_view_model->account = $accountRepo->GetById($invoice->account_id);
-				$invoice_view_model->bill_count = $billRepo->CountByInvoiceId($invoice->invoice_id);
-
-				array_push($invoice_view_models, $invoice_view_model);
-			}
-
-			$model->invoices = $invoice_view_models;
-			$model->success = true;
-
-			return $model;
+			return $invoiceRepo->ListAll();
 		}
 
 		public function GetById($id) {
@@ -70,7 +50,7 @@
 				}
 			}
 			foreach($model->tables as $table) {
-				$table->headers = array('Date' => 'date', 'Bill ID' => 'bill_id', 'Bill Number' => 'bill_number', 'Type' => 'type');
+				$table->headers = array('Date' => 'date', 'Bill ID' => 'bill_id', 'Bill Number' => 'bill_number', 'Type' => 'delivery_type');
 				if($subtotal_by != NULL && $subtotal_by->database_field_name == 'charge_account_id')
 					$table->headers[$accountRepo->GetById($table->bills[0]->charge_account_id)->custom_field] = 'charge_reference_value';
 				else if($model->parent->uses_custom_field)
